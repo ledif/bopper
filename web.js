@@ -11,10 +11,16 @@ app.get('/', function(req, res) {
   res.header("Access-Control-Allow-Origin", "*")
 
   var uri = req.query.uri
+
+  // if the uri isn't set, just send empty result
+  if (!uri) {
+    res.send({});
+    return;
+  }
+
+  // if the url doesn't have http, add it
   if (uri.lastIndexOf("http://", 0) !== 0)
     uri = "http://" + uri;
-
-  console.log("request for " + uri);
 
   request({uri : uri}, function(error, response, body) {
     if (!error && response.statusCode === 200)
@@ -29,6 +35,7 @@ app.get('/', function(req, res) {
 
       res.send(result);
     }
+    // send empty result if document doesn't exist, or other http error
     else
     {
       res.send({})
