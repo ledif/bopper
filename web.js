@@ -1,15 +1,14 @@
 // web.js
 var express = require("express");
-var logfmt = require("logfmt");
+var morgan  = require('morgan');
 var app = express();
 
 var request = require('request'),
 	cheerio = require('cheerio');
 
-app.use(logfmt.requestLogger());
-app.use(express.json());       // to support JSON-encoded bodies
+app.use(morgan('dev'));
+//app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
-app.use('/assets', express.static(__dirname + '/public'));
 
 app.get('/bop', function(req, res) {
 	var uri = req.query.uri
