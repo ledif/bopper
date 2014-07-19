@@ -8,6 +8,8 @@ var app = express();
 app.use(morgan('dev'));
 
 app.get('/', function(req, res) {
+  res.header("Access-Control-Allow-Origin", "*")
+
   var uri = req.query.uri
 
   request({uri : uri}, function(error, response, body) {
