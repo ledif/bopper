@@ -5,7 +5,6 @@ var express = require("express"),
 
 var app = express();
 
-// log that shiz
 app.use(morgan('dev'));
 
 app.get('/', function(req, res) {
@@ -26,7 +25,7 @@ app.get('/', function(req, res) {
     }
     else
     {
-      res.send({x: "something went wrong"})
+      res.send({})
     }
   });
 });
