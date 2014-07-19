@@ -12,7 +12,6 @@
   "author": "Adam Fidel",
   "license": "MIT",
   "dependencies": {
-    "logfmt": "^1.1.2",
     "express": "^4.6.1",
     "cheerio": "^0.17.0",
     "request": "^2.37.0",
