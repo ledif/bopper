@@ -30,6 +30,11 @@ app.get('/', function(req, res) {
   });
 });
 
+app.options('/', function(req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.end('');
+});
+
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
   console.log("Listening on " + port);
