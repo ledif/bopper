@@ -11,8 +11,10 @@ app.get('/', function(req, res) {
   res.header("Access-Control-Allow-Origin", "*")
 
   var uri = req.query.uri
-  if (uri.substring(0,3) !== "http")
+  if (uri.lastIndexOf("http://", 0) !== 0)
     uri = "http://" + uri;
+
+  console.log("request for " + uri);
 
   request({uri : uri}, function(error, response, body) {
     if (!error && response.statusCode === 200)
