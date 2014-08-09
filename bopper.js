@@ -31,6 +31,10 @@ var getByURI = function(uri, cb) {
 var boppify = function(str) {
   str = str.toLowerCase();
 
+  // replace & with and
+  str = str.replace(/\&/g, "and")
+
+
   // replace stuff with hyphens
   str = str.replace(/ |\/|\\/g, "-")
 

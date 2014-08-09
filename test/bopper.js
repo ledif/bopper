@@ -36,6 +36,13 @@ describe("boppify", function() {
 
        expect(result).to.equal("ni**as-in-paris");
     });
+
+    it("replace & with and", function(){
+       var title = "Macklemore & Ryan Lewis"
+       var result = bopper.boppify(title)
+
+       expect(result).to.equal("macklemore-and-ryan-lewis");
+    });
 });
 
 describe("url from song and artist", function() {
