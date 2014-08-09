@@ -1,7 +1,7 @@
 var express = require("express"),
     morgan  = require('morgan'),
-    request = require('request'),
-    cheerio = require('cheerio');
+    bopper  = require('./bopper')
+
 
 var app = express();
 
@@ -12,35 +12,26 @@ app.get('/', function(req, res) {
 
   var uri = req.query.uri
 
-  // if the uri isn't set, just send empty result
-  if (!uri) {
+  var artist = req.query.artist
+  var song = req.query.song
+
+  // if nothing is set, send an empty result
+  if (!uri && !artist && !song) {
     res.send({});
     return;
   }
 
-  // if the url doesn't have http, add it
-  if (uri.lastIndexOf("http://", 0) !== 0)
-    uri = "http://" + uri;
-
-  request({uri : uri}, function(error, response, body) {
-    if (!error && response.statusCode === 200)
-    {
-      var parsedDocument = cheerio.load(body);
-
-      var result = {
-        title: parsedDocument("meta[name='twitter:text:main_song_title']").attr("content"),
-        artist: parsedDocument("meta[name='twitter:text:main_song_artist']").attr("content"),
-        image: parsedDocument("meta[name='twitter:image:song_thumbnail_img']").attr("content")
-      }
-
-      res.send(result);
-    }
-    // send empty result if document doesn't exist, or other http error
+  var cb = function(err, result) {
+    if (!err)
+      res.send(result)
     else
-    {
       res.send({})
-    }
-  });
+  };
+
+  if (uri)
+    bopper.getByURI(uri, cb);
+   else
+    bopper.getByArtistSong(artist, song, cb)
 });
 
 app.options('/', function(req, res) {

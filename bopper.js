@@ -41,7 +41,7 @@ var boppify = function(str) {
 
 var uriFromArtistSong = function(artist, song) {
   s = "http://bop.fm/s/" + boppify(artist) + "/" + boppify(song);
-  // console.log(s);
+   console.log(s);
   return s
 }
 
