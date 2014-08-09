@@ -34,8 +34,8 @@ var boppify = function(str) {
   // replace stuff with hyphens
   str = str.replace(/ |\/|\\/g, "-")
 
-  // get rid of everything that's not a hyphen, period or alphanumeric
-  str = str.replace(/[^a-zA-Z0-9-.]/g, '')
+  // get rid of everything that's not a hyphen, period, star or alphanumeric
+  str = str.replace(/[^a-zA-Z0-9-.\*]/g, '')
   return str
 }
 

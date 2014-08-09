@@ -29,6 +29,13 @@ describe("boppify", function() {
  
            expect(result).to.equal("i.-crawl");
     });
+
+    it("keep asterisks", function(){
+       var title = "Ni**as In Paris"
+       var result = bopper.boppify(title)
+
+       expect(result).to.equal("ni**as-in-paris");
+    });
 });
 
 describe("url from song and artist", function() {
