@@ -1,6 +1,21 @@
  var request = require('request'),
      cheerio = require('cheerio');
 
+if (!String.prototype.trim) {  
+  String.prototype.trim = function () {  
+    return this.replace(/^\s+|\s+$/g,'');  
+  };  
+} 
+
+var parseTitle = function(str) {
+  var explode = str.split("|");
+
+  return {
+    title: explode[0].trim(),
+    artist: explode[1].trim(),
+  }
+}
+
 var getByURI = function(uri, cb) {
   // if the url doesn't have http, add it
   if (uri.lastIndexOf("http://", 0) !== 0)
@@ -11,10 +26,13 @@ var getByURI = function(uri, cb) {
     {
       var parsedDocument = cheerio.load(body);
 
+      var parsedTitle = parseTitle(parsedDocument("title").text());
+
+
       var result = {
-        title: parsedDocument("meta[name='twitter:text:main_song_title']").attr("content"),
-        artist: parsedDocument("meta[name='twitter:text:main_song_artist']").attr("content"),
-        image: parsedDocument("meta[name='twitter:image:song_thumbnail_img']").attr("content"),
+        title: parsedTitle.title,
+        artist: parsedTitle.artist,
+        image: parsedDocument("meta[name='twitter:image:src']").attr("content"),
         uri: uri
       }
 
