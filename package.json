@@ -4,7 +4,7 @@
   "description": "Get metadata from bop.fm song urls.",
   "main": "web.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test"
   },
   "keywords": [
     "bop.fm"
@@ -15,6 +15,7 @@
     "express": "^4.6.1",
     "cheerio": "^0.17.0",
     "request": "^2.37.0",
-    "morgan": "^1.1.1"
+    "morgan": "^1.1.1",
+    "mocha": "^1.21.4"
   }
 }
