@@ -28,11 +28,16 @@ var getByURI = function(uri, cb) {
 
       var parsedTitle = parseTitle(parsedDocument("title").text());
 
+      var image = parsedDocument("meta[property='og:image']").attr("content");
+
+      if (!image)
+        image = parsedDocument("meta[name='twitter:image:src']").attr("content");
+
 
       var result = {
         title: parsedTitle.title,
         artist: parsedTitle.artist,
-        image: parsedDocument("meta[name='twitter:image:src']").attr("content"),
+        image: image,
         uri: uri
       }
 
@@ -63,7 +68,6 @@ var boppify = function(str) {
 
 var uriFromArtistSong = function(artist, song) {
   s = "http://bop.fm/s/" + boppify(artist) + "/" + boppify(song);
-   console.log(s);
   return s
 }
 
