@@ -12,7 +12,7 @@ Requires
 
 To install the correct npms:
 ```
-npm install express morgan request cheerio --save
+npm install
 ```
 
 Run
