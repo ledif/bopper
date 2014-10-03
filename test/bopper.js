@@ -43,6 +43,13 @@ describe("boppify", function() {
 
        expect(result).to.equal("macklemore-and-ryan-lewis");
     });
+
+    it("underscore", function(){
+       var title = "Can I Buy A V_wel"
+       var result = bopper.boppify(title)
+
+       expect(result).to.equal("can-i-buy-a-v-wel");
+    });
 });
 
 describe("url from song and artist", function() {
