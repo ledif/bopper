@@ -1,8 +1,6 @@
  var request = require('request'),
      cheerio = require('cheerio');
 
-breakingthis
-
 if (!String.prototype.trim) {  
   String.prototype.trim = function () {  
     return this.replace(/^\s+|\s+$/g,'');  
