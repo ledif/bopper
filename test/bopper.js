@@ -61,3 +61,12 @@ describe("url from song and artist", function() {
            expect(result).to.equal("http://bop.fm/s/drake/too-much");
     });
 });
+
+describe("strip cloudinary", function() {
+  it("stripppp", function(){
+           var origURL = "https://res.cloudinary.com/hyam10gog/image/fetch/c_fill,h_244,w_435/http://a3.mzstatic.com/us/r30/Music3/v4/02/51/22/0251224a-9c72-5929-733c-e93a6182b67d/888831637257.1200x1200-75.jpg"
+           var result = bopper.stripCloudinary(origURL)
+ 
+           expect(result).to.equal("http://a3.mzstatic.com/us/r30/Music3/v4/02/51/22/0251224a-9c72-5929-733c-e93a6182b67d/888831637257.1200x1200-75.jpg");
+    });
+});

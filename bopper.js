@@ -5,7 +5,13 @@ if (!String.prototype.trim) {
   String.prototype.trim = function () {  
     return this.replace(/^\s+|\s+$/g,'');  
   };  
-} 
+}
+
+var stripCloudinary = function(str) {
+  var origUrl = str.lastIndexOf("http://");
+
+  return str.substring(origUrl);
+}
 
 var parseTitle = function(str) {
   var explode = str.split("|");
@@ -28,16 +34,13 @@ var getByURI = function(uri, cb) {
 
       var parsedTitle = parseTitle(parsedDocument("title").text());
 
-      var image = parsedDocument("meta[property='og:image']").attr("content");
-
-      if (!image)
-        image = parsedDocument("meta[name='twitter:image:src']").attr("content");
+      var image = parsedDocument("meta[name='twitter:image:src']").attr("content");
 
 
       var result = {
         title: parsedTitle.title,
         artist: parsedTitle.artist,
-        image: image,
+        image: stripCloudinary(image),
         uri: uri
       }
 
@@ -80,3 +83,4 @@ module.exports.getByURI = getByURI
 module.exports.getByArtistSong = getByArtistSong
 module.exports.boppify = boppify
 module.exports.uriFromArtistSong = uriFromArtistSong
+module.exports.stripCloudinary = stripCloudinary
